@@ -26,6 +26,7 @@ print(chalk.yellow("\________\__| \__| \__|\_______\__\__|      \_______/ \_____
 print('\n\n')
 print(chalk.red.bold("                         Please use this tool for educational purpose only.                            "))
 print(chalk.red.bold("                   Github : https://github.com/Nocturnal-Compiler/Better-Email-Bomber                  "))
+print('\n\n')
 user = input(chalk.green('[1] ----> Anonymous name: '))
 email = input(chalk.green('\n[2] ----> Attacker Email Address: '))
 passwd = getpass(chalk.green.bold('\n[3] ----> Attacker Email Password: '))
