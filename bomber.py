@@ -34,6 +34,7 @@ to = input(chalk.red('\n[4] ----> Victim Email Address: '))
 total = input(chalk.blue('\n[5] ----> Number of emails: '))
 subject = input(chalk.blue('\n[6] ----> [Title Of The Email] Subject: '))
 body = input(chalk.blue('\n[7] ----> Message: '))
+time = input(chalk.green('\n[8] ----> Time to wait between each email (in Seconds): '))
 Cserver = input(chalk.red('\n[+] Custom smtp server (leave blank to use gmail): '))
 
 if not Cserver == '':
@@ -63,7 +64,7 @@ try:
         msg.set_content(body)
         server.send_message(msg)
         print(chalk.green.bold("\r[+] E-mails sent: %i" % i))
-        sleep(1)
+        sleep(time)
         sys.stdout.flush()
     server.quit()
     print('\n Done !!!')
