@@ -32,8 +32,8 @@ email = input(chalk.green('\n[2] ----> Attacker Email Address: '))
 passwd = getpass(chalk.green.bold('\n[3] ----> Attacker Email Password: '))
 to = input(chalk.red('\n[4] ----> Victim Email Address: '))
 total = input(chalk.blue('\n[5] ----> Number of emails: '))
-subject = input(chalk.blue('\n[7] ----> [Title Of The Email] Subject: '))
-body = input(chalk.blue('\n[6] ----> Message: '))
+subject = input(chalk.blue('\n[6] ----> [Title Of The Email] Subject: '))
+body = input(chalk.blue('\n[7] ----> Message: '))
 Cserver = input(chalk.red('\n[+] Custom smtp server (leave blank to use gmail): '))
 
 if not Cserver == '':
