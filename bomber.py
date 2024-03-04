@@ -1,9 +1,3 @@
-#!/usr/bin/python3
-#E-bomber
-#This code for education purpose only.
-#Use it at your own risk !!!
-# Better Python Rewrite by Noctornal-Compiler
-
 from os import urandom
 import smtplib
 from email.message import EmailMessage
