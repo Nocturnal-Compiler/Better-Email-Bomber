@@ -53,7 +53,9 @@ def smsbombingwin():
     options.headless = True
     options.add_argument("--log-level=3")
 
-    wcr_dict = os.getcwd() + '//chromedriver.exe'
+    wcr_dict = os.getcwd() + '\chromedriver.exe'
+
+    print(wcr_dict)
 
     browser = webdriver.Chrome(executable_path=wcr_dict, chrome_options=options)
 
