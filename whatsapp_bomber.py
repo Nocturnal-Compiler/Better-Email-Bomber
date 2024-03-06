@@ -34,7 +34,7 @@ def wpbombingwin():
     print(chalk.green(eascii))
 
     try:
-        confirm = WebDriverWait(browser, 600).until(EC.presence_of_element_located(
+        WebDriverWait(browser, 600).until(EC.presence_of_element_located(
             (By.CLASS_NAME, "_3BDr5")))
     finally:
         pass
