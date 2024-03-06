@@ -55,7 +55,7 @@ def smsbombingwin():
 
     wcr_dict = os.getcwd() + '\chromedriver.exe'
 
-    print(wcr_dict)
+    print(chalk.green("[+] Chrome Driver Path Found = ",wcr_dict))
 
     browser = webdriver.Chrome(executable_path=wcr_dict, chrome_options=options)
 
