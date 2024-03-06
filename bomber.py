@@ -1,6 +1,7 @@
 from simple_chalk import chalk
 from email_bomber import ebombingwin
 from sms_bomber import smsbombingwin
+from whatsapp_bomber import wpbombingwin
 import sys
 
 Bomber = """
@@ -57,8 +58,7 @@ elif opt == 2:
     smsbombingwin()
 
 elif opt == 3:
-    print(chalk.red.bold("WhatsApp Bomber is under development. Please try again later."))
-    sys.exit()
+    wpbombingwin()
 
 elif opt == 4:
     print(chalk.red.bold("Instagram Bomber is under development. Please try again later."))
