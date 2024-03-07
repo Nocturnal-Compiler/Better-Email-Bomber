@@ -29,13 +29,14 @@ def wpbombingwin():
     \__/     \__\__|  \__|\_______| \____/\_______/ \_______$$  ____/$$  ____/       \_______/ \______/\__| \__| \__\_______/ \_______\__|      
                                                             $$ |     $$ |                                                                       
                                                             $$ |     $$ |                                                                       
-                                                            \__|     \__|                                                                                                   
+                                                            \__|     \__|                                                                                                                                                                                           
 """
     print(chalk.green(eascii))
 
     try:
-        WebDriverWait(browser, 600).until(EC.presence_of_element_located(
+        confirm = WebDriverWait(browser, 600).until(EC.presence_of_element_located(
             (By.CLASS_NAME, "_3BDr5")))
+        browser.find_element_by_class_name("_3BDr5").click()
     finally:
         pass
 
